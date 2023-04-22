@@ -1,12 +1,14 @@
+import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { readFile, writeFile } from 'fs/promises';
 
+@Injectable()
 export class MessagesRepository {
-  async findById(id: string) {
+  async findById(uuid: string) {
     const contents = await readFile('messages.json', 'utf8');
     const messages = JSON.parse(contents);
 
-    return messages[id];
+    return messages[uuid];
   }
 
   async findAll() {
